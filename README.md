@@ -1,4 +1,4 @@
-# FormAPI Ruby Client
+# FormAPI Python Client
 
 This is a Python client library for the [FormAPI](https://formapi.io) service. FormAPI generates PDF documents from configured templates.
 
@@ -82,7 +82,7 @@ You can modify this file and regenerate the client using `scripts/generate`.
 5. Update [CHANGELOG.md](CHANGELOG.md)
 6. Commit "Release version vX.Y.Z"
 7. `rake release`
-8. Verify package release at https://rubygems.org/gems/formapi
+8. Verify package release at https://pypi.python.org/pypi/form-api
 9. Refresh documentation on formapi.io
 
 
