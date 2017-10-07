@@ -6,13 +6,13 @@ This is a Python client library for the [FormAPI](https://formapi.io) service. F
 ## Installation
 
 ```bash
-pip install form_api
+pip install --upgrade form-api
 ```
 
 or
 
 ```bash
-easy_install form_api
+easy_install --upgrade form-api
 ```
 
 If you're not using [`virtualenv`](http://www.virtualenv.org/), you may have to prefix these commands with `sudo`.
