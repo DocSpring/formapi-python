@@ -49,7 +49,7 @@ class Client(PDFApi):
             timeout = kwargs['timeout']
 
         # Wait for submission to be ready
-        while (submission.state != 'processed'):
+        while (submission.state == 'pending'):
             time.sleep(1)
             submission = self.get_submission(submission.id)
 
@@ -78,7 +78,7 @@ class Client(PDFApi):
             timeout = kwargs['timeout']
 
         # Wait for submission to be ready
-        while (combined_submission.state != 'processed'):
+        while (combined_submission.state == 'pending'):
             time.sleep(1)
             combined_submission = self.get_combined_submission(combined_submission.id)
 
