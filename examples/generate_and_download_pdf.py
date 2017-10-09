@@ -14,13 +14,14 @@ if sys.version_info > (3, 0):
 else:
   import urllib
 
-# This are test values that you can use to generate a real PDF
-form_api.configuration.username = "yRaaR9JmTPtGX7EN"
-form_api.configuration.password = "IB3TRkSdm4f2BdtU_D3YgxjdMB7l-r2fOgvxD1Yzwec"
-# form_api.configuration.debug = True
-template_id = "6zz3dYRYM67fxMXA"
 
 fa_client = form_api.Client()
+
+# These are test values that you can use to generate a real PDF
+fa_client.api_client.configuration.username = "yRaaR9JmTPtGX7EN"
+fa_client.api_client.configuration.password = "IB3TRkSdm4f2BdtU_D3YgxjdMB7l-r2fOgvxD1Yzwec"
+# fa_client.api_client.configuration.debug = True
+template_id = "6zz3dYRYM67fxMXA"
 
 try:
   submission = fa_client.generate_pdf({

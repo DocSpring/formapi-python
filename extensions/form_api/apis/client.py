@@ -18,7 +18,6 @@ import re
 import time
 
 from .pdf_api import PDFApi
-from ..models import InlineResponse201Submission
 
 class PollTimeoutError(Exception):
     pass
@@ -32,7 +31,7 @@ class Client(PDFApi):
         """
         Generates a new PDF and waits for PDF to be ready.
         :param Data data:
-        :return: InlineResponse201
+        :return: InlineResponse2011
         """
         template_id = data.get('template_id')
         del data['template_id']
@@ -42,7 +41,7 @@ class Client(PDFApi):
 
         (data) = self.generate_pdf_with_http_info(template_id, **kwargs)
 
-        submission = self.get_submission(data.submission.id)
+        submission = data.submission
 
         start_time = time.time()
         timeout = 60
@@ -58,3 +57,32 @@ class Client(PDFApi):
                 raise PollTimeoutError("PDF was not ready after %d seconds!" % timeout)
 
         return submission
+
+
+    def combine_submissions(self, data, **kwargs):
+        """
+        Combines multiple submissions into a single PDF, and waits for merged PDF to be ready.
+        :param Data data
+        :return: InlineResponse201
+        """
+        kwargs['data'] = data
+        kwargs['_return_http_data_only'] = True
+
+        (data) = self.combine_submissions_with_http_info(**kwargs)
+
+        combined_submission = data.combined_submission
+
+        start_time = time.time()
+        timeout = 60
+        if 'timeout' in kwargs and kwargs['timeout'] is not None:
+            timeout = kwargs['timeout']
+
+        # Wait for submission to be ready
+        while (combined_submission.state != 'processed'):
+            time.sleep(1)
+            combined_submission = self.get_combined_submission(combined_submission.id)
+
+            if time.time() - start_time > timeout:
+                raise PollTimeoutError("Merged PDF was not ready after %d seconds!" % timeout)
+
+        return combined_submission

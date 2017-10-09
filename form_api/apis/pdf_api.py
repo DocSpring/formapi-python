@@ -35,6 +35,191 @@ class PDFApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
+    def combine_submissions(self, **kwargs):
+        """
+        Merge generated PDFs together
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.combine_submissions(async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param Data data:
+        :return: InlineResponse201
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async'):
+            return self.combine_submissions_with_http_info(**kwargs)
+        else:
+            (data) = self.combine_submissions_with_http_info(**kwargs)
+            return data
+
+    def combine_submissions_with_http_info(self, **kwargs):
+        """
+        Merge generated PDFs together
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.combine_submissions_with_http_info(async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param Data data:
+        :return: InlineResponse201
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['data']
+        all_params.append('async')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method combine_submissions" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'data' in params:
+            body_params = params['data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['basic']
+
+        return self.api_client.call_api('/combined_submissions', 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='InlineResponse201',
+                                        auth_settings=auth_settings,
+                                        async=params.get('async'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def expire_combined_submission(self, combined_submission_id, **kwargs):
+        """
+        Expire a combined submission
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.expire_combined_submission(combined_submission_id, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str combined_submission_id: (required)
+        :return: InlineResponse201CombinedSubmission
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async'):
+            return self.expire_combined_submission_with_http_info(combined_submission_id, **kwargs)
+        else:
+            (data) = self.expire_combined_submission_with_http_info(combined_submission_id, **kwargs)
+            return data
+
+    def expire_combined_submission_with_http_info(self, combined_submission_id, **kwargs):
+        """
+        Expire a combined submission
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.expire_combined_submission_with_http_info(combined_submission_id, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str combined_submission_id: (required)
+        :return: InlineResponse201CombinedSubmission
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['combined_submission_id']
+        all_params.append('async')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method expire_combined_submission" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'combined_submission_id' is set
+        if ('combined_submission_id' not in params) or (params['combined_submission_id'] is None):
+            raise ValueError("Missing the required parameter `combined_submission_id` when calling `expire_combined_submission`")
+
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'combined_submission_id' in params:
+            path_params['combined_submission_id'] = params['combined_submission_id']
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['basic']
+
+        return self.api_client.call_api('/combined_submissions/{combined_submission_id}', 'DELETE',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='InlineResponse201CombinedSubmission',
+                                        auth_settings=auth_settings,
+                                        async=params.get('async'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
     def expire_submission(self, submission_id, **kwargs):
         """
         Expire a PDF submission
@@ -45,7 +230,7 @@ class PDFApi(object):
 
         :param async bool
         :param str submission_id: (required)
-        :return: InlineResponse201Submission
+        :return: InlineResponse2011Submission
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -66,7 +251,7 @@ class PDFApi(object):
 
         :param async bool
         :param str submission_id: (required)
-        :return: InlineResponse201Submission
+        :return: InlineResponse2011Submission
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -119,7 +304,7 @@ class PDFApi(object):
                                         body=body_params,
                                         post_params=form_params,
                                         files=local_var_files,
-                                        response_type='InlineResponse201Submission',
+                                        response_type='InlineResponse2011Submission',
                                         auth_settings=auth_settings,
                                         async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -137,8 +322,8 @@ class PDFApi(object):
 
         :param async bool
         :param str template_id: (required)
-        :param Data data:
-        :return: InlineResponse201
+        :param Data1 data:
+        :return: InlineResponse2011
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -159,8 +344,8 @@ class PDFApi(object):
 
         :param async bool
         :param str template_id: (required)
-        :param Data data:
-        :return: InlineResponse201
+        :param Data1 data:
+        :return: InlineResponse2011
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -219,7 +404,99 @@ class PDFApi(object):
                                         body=body_params,
                                         post_params=form_params,
                                         files=local_var_files,
-                                        response_type='InlineResponse201',
+                                        response_type='InlineResponse2011',
+                                        auth_settings=auth_settings,
+                                        async=params.get('async'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def get_combined_submission(self, combined_submission_id, **kwargs):
+        """
+        Check the status of a combined submission (merged PDFs)
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_combined_submission(combined_submission_id, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str combined_submission_id: (required)
+        :return: InlineResponse201CombinedSubmission
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async'):
+            return self.get_combined_submission_with_http_info(combined_submission_id, **kwargs)
+        else:
+            (data) = self.get_combined_submission_with_http_info(combined_submission_id, **kwargs)
+            return data
+
+    def get_combined_submission_with_http_info(self, combined_submission_id, **kwargs):
+        """
+        Check the status of a combined submission (merged PDFs)
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_combined_submission_with_http_info(combined_submission_id, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str combined_submission_id: (required)
+        :return: InlineResponse201CombinedSubmission
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['combined_submission_id']
+        all_params.append('async')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_combined_submission" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'combined_submission_id' is set
+        if ('combined_submission_id' not in params) or (params['combined_submission_id'] is None):
+            raise ValueError("Missing the required parameter `combined_submission_id` when calling `get_combined_submission`")
+
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'combined_submission_id' in params:
+            path_params['combined_submission_id'] = params['combined_submission_id']
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['basic']
+
+        return self.api_client.call_api('/combined_submissions/{combined_submission_id}', 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='InlineResponse201CombinedSubmission',
                                         auth_settings=auth_settings,
                                         async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -237,7 +514,7 @@ class PDFApi(object):
 
         :param async bool
         :param str submission_id: (required)
-        :return: InlineResponse201Submission
+        :return: InlineResponse2011Submission
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -258,7 +535,7 @@ class PDFApi(object):
 
         :param async bool
         :param str submission_id: (required)
-        :return: InlineResponse201Submission
+        :return: InlineResponse2011Submission
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -311,7 +588,7 @@ class PDFApi(object):
                                         body=body_params,
                                         post_params=form_params,
                                         files=local_var_files,
-                                        response_type='InlineResponse201Submission',
+                                        response_type='InlineResponse2011Submission',
                                         auth_settings=auth_settings,
                                         async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
