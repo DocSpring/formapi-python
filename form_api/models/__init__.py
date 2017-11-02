@@ -16,6 +16,7 @@ from __future__ import absolute_import
 # import models into model package
 from .data import Data
 from .data_1 import Data1
+from .inline_response_200 import InlineResponse200
 from .inline_response_201 import InlineResponse201
 from .inline_response_201_1 import InlineResponse2011
 from .inline_response_201_1_submission import InlineResponse2011Submission

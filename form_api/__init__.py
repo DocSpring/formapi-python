@@ -16,6 +16,7 @@ from __future__ import absolute_import
 # import models into sdk package
 from .models.data import Data
 from .models.data_1 import Data1
+from .models.inline_response_200 import InlineResponse200
 from .models.inline_response_201 import InlineResponse201
 from .models.inline_response_201_1 import InlineResponse2011
 from .models.inline_response_201_1_submission import InlineResponse2011Submission
