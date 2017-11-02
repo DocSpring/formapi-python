@@ -25,11 +25,9 @@ See [examples](examples/) for some runnable examples.
 ```python
 import form_api
 
-form_api.configuration.username = "YOUR_API_TOKEN_ID"
-form_api.configuration.password = "YOUR_API_TOKEN_SECRET"
-# form_api.configuration.debug = True
-
 client = form_api.Client()
+client.api_client.configuration.username = "YOUR_API_TOKEN_ID"
+client.api_client.configuration.password = "YOUR_API_TOKEN_SECRET"
 
 response = client.generate_pdf({
   "template_id": "YOUR_TEMPLATE_ID",      # ID of a template that you have configured
