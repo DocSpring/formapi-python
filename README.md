@@ -1,5 +1,9 @@
 # FormAPI Python Client
 
+**NOTE**: We've moved all clients to a single repo: [formapi-swagger-codegen](https://github.com/FormAPI/formapi-swagger-codegen)
+
+---------------------------------------------
+
 This is a Python client library for the [FormAPI](https://formapi.io) service. FormAPI generates PDF documents from configured templates.
 
 
