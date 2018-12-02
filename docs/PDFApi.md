@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**batch_generate_pdfs**](PDFApi.md#batch_generate_pdfs) | **POST** /submissions/batches | Generates multiple PDFs
 [**combine_submissions**](PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
 [**create_data_request_token**](PDFApi.md#create_data_request_token) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
+[**create_template**](PDFApi.md#create_template) | **POST** /templates | Upload a new PDF template
 [**expire_combined_submission**](PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generate_pdf**](PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
@@ -15,6 +16,8 @@ Method | HTTP request | Description
 [**get_data_request**](PDFApi.md#get_data_request) | **GET** /data_requests/{data_request_id} | Look up a submission data request
 [**get_submission**](PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
 [**get_submission_batch**](PDFApi.md#get_submission_batch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
+[**get_template**](PDFApi.md#get_template) | **GET** /templates/{template_id} | Check the status of an uploaded template
+[**get_template_schema**](PDFApi.md#get_template_schema) | **GET** /templates/{template_id}/schema | Fetch the JSON schema for a template
 [**get_templates**](PDFApi.md#get_templates) | **GET** /templates | Get a list of all templates
 [**test_authentication**](PDFApi.md#test_authentication) | **GET** /authentication | Test Authentication
 [**update_data_request**](PDFApi.md#update_data_request) | **PUT** /data_requests/{data_request_id} | Update a submission data request
@@ -230,6 +233,61 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_template**
+> Template1 create_template(template_document, template_name)
+
+Upload a new PDF template
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+template_document = '/path/to/file' # file | 
+template_name = 'template_name_example' # str | 
+
+try:
+    # Upload a new PDF template
+    api_response = api_instance.create_template(template_document, template_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->create_template: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_document** | **file**|  | 
+ **template_name** | **str**|  | 
+
+### Return type
+
+[**Template1**](Template1.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -597,6 +655,112 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SubmissionBatch**](SubmissionBatch.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_template**
+> Template get_template(template_id)
+
+Check the status of an uploaded template
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+template_id = 'tpl_000000000000000001' # str | 
+
+try:
+    # Check the status of an uploaded template
+    api_response = api_instance.get_template(template_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->get_template: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **str**|  | 
+
+### Return type
+
+[**Template**](Template.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_template_schema**
+> dict(str, object) get_template_schema(template_id)
+
+Fetch the JSON schema for a template
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+template_id = 'tpl_000000000000000001' # str | 
+
+try:
+    # Fetch the JSON schema for a template
+    api_response = api_instance.get_template_schema(template_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->get_template_schema: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **str**|  | 
+
+### Return type
+
+**dict(str, object)**
 
 ### Authorization
 
