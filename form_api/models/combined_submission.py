@@ -37,7 +37,8 @@ class CombinedSubmission(object):
         'download_url': 'str',
         'submission_ids': 'list[str]',
         'id': 'str',
-        'state': 'str'
+        'state': 'str',
+        'actions': 'list[CombinedSubmissionAction]'
     }
 
     attribute_map = {
@@ -47,10 +48,11 @@ class CombinedSubmission(object):
         'download_url': 'download_url',
         'submission_ids': 'submission_ids',
         'id': 'id',
-        'state': 'state'
+        'state': 'state',
+        'actions': 'actions'
     }
 
-    def __init__(self, metadata=None, expired=None, expires_at=None, download_url=None, submission_ids=None, id=None, state=None):  # noqa: E501
+    def __init__(self, metadata=None, expired=None, expires_at=None, download_url=None, submission_ids=None, id=None, state=None, actions=None):  # noqa: E501
         """CombinedSubmission - a model defined in OpenAPI"""  # noqa: E501
 
         self._metadata = None
@@ -60,6 +62,7 @@ class CombinedSubmission(object):
         self._submission_ids = None
         self._id = None
         self._state = None
+        self._actions = None
         self.discriminator = None
 
         if metadata is not None:
@@ -76,6 +79,8 @@ class CombinedSubmission(object):
             self.id = id
         if state is not None:
             self.state = state
+        if actions is not None:
+            self.actions = actions
 
     @property
     def metadata(self):
@@ -229,6 +234,27 @@ class CombinedSubmission(object):
             )
 
         self._state = state
+
+    @property
+    def actions(self):
+        """Gets the actions of this CombinedSubmission.  # noqa: E501
+
+
+        :return: The actions of this CombinedSubmission.  # noqa: E501
+        :rtype: list[CombinedSubmissionAction]
+        """
+        return self._actions
+
+    @actions.setter
+    def actions(self, actions):
+        """Sets the actions of this CombinedSubmission.
+
+
+        :param actions: The actions of this CombinedSubmission.  # noqa: E501
+        :type: list[CombinedSubmissionAction]
+        """
+
+        self._actions = actions
 
     def to_dict(self):
         """Returns the model properties as a dict"""

@@ -15,12 +15,12 @@ from __future__ import absolute_import
 import unittest
 
 import form_api
-from form_api.models.template1 import Template1  # noqa: E501
+from form_api.models.pending_template import PendingTemplate  # noqa: E501
 from form_api.rest import ApiException
 
 
-class TestTemplate1(unittest.TestCase):
-    """Template1 unit test stubs"""
+class TestPendingTemplate(unittest.TestCase):
+    """PendingTemplate unit test stubs"""
 
     def setUp(self):
         pass
@@ -28,10 +28,10 @@ class TestTemplate1(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testTemplate1(self):
-        """Test Template1"""
+    def testPendingTemplate(self):
+        """Test PendingTemplate"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = form_api.models.template1.Template1()  # noqa: E501
+        # model = form_api.models.pending_template.PendingTemplate()  # noqa: E501
         pass
 
 

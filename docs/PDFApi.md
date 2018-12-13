@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_template**
-> Template1 create_template(template_document, template_name)
+> PendingTemplate create_template(template_document, template_name)
 
 Upload a new PDF template
 
@@ -279,7 +279,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Template1**](Template1.md)
+[**PendingTemplate**](PendingTemplate.md)
 
 ### Authorization
 

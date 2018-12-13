@@ -40,7 +40,8 @@ class Submission(object):
         'metadata': 'object',
         'download_url': 'str',
         'batch_id': 'str',
-        'data_requests': 'list[SubmissionDataRequest]'
+        'data_requests': 'list[SubmissionDataRequest]',
+        'actions': 'list[SubmissionAction]'
     }
 
     attribute_map = {
@@ -53,10 +54,11 @@ class Submission(object):
         'metadata': 'metadata',
         'download_url': 'download_url',
         'batch_id': 'batch_id',
-        'data_requests': 'data_requests'
+        'data_requests': 'data_requests',
+        'actions': 'actions'
     }
 
-    def __init__(self, id=None, test=None, expired=None, expires_at=None, processed_at=None, state=None, metadata=None, download_url=None, batch_id=None, data_requests=None):  # noqa: E501
+    def __init__(self, id=None, test=None, expired=None, expires_at=None, processed_at=None, state=None, metadata=None, download_url=None, batch_id=None, data_requests=None, actions=None):  # noqa: E501
         """Submission - a model defined in OpenAPI"""  # noqa: E501
 
         self._id = None
@@ -69,6 +71,7 @@ class Submission(object):
         self._download_url = None
         self._batch_id = None
         self._data_requests = None
+        self._actions = None
         self.discriminator = None
 
         self.id = id
@@ -87,6 +90,8 @@ class Submission(object):
             self.batch_id = batch_id
         if data_requests is not None:
             self.data_requests = data_requests
+        if actions is not None:
+            self.actions = actions
 
     @property
     def id(self):
@@ -311,6 +316,27 @@ class Submission(object):
         """
 
         self._data_requests = data_requests
+
+    @property
+    def actions(self):
+        """Gets the actions of this Submission.  # noqa: E501
+
+
+        :return: The actions of this Submission.  # noqa: E501
+        :rtype: list[SubmissionAction]
+        """
+        return self._actions
+
+    @actions.setter
+    def actions(self, actions):
+        """Sets the actions of this Submission.
+
+
+        :param actions: The actions of this Submission.  # noqa: E501
+        :type: list[SubmissionAction]
+        """
+
+        self._actions = actions
 
     def to_dict(self):
         """Returns the model properties as a dict"""

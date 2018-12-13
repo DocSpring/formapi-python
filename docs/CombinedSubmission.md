@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **submission_ids** | **list[str]** |  | [optional] 
 **id** | **str** |  | [optional] 
 **state** | **str** |  | [optional] 
+**actions** | [**list[CombinedSubmissionAction]**](CombinedSubmissionAction.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
