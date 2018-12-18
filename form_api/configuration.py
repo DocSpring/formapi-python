@@ -47,7 +47,7 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
     def __init__(self):
         """Constructor"""
         # Default Base url
-        self.host = "https://app.formapi.io/api/v1"
+        self.host = "https://api.formapi.io/api/v1"
         # Temp file folder for downloading files
         self.temp_folder_path = None
 
@@ -243,5 +243,5 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: v1\n"\
-               "SDK Package Version: 1.5.0".\
+               "SDK Package Version: 1.6.0".\
                format(env=sys.platform, pyversion=sys.version)
