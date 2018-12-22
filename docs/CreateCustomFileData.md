@@ -1,13 +1,9 @@
-# CreateSubmissionDataBatchV1
+# CreateCustomFileData
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**test** | **bool** |  | [optional] 
-**data** | **object** |  | 
-**html** | **str** |  | [optional] 
-**css** | **str** |  | [optional] 
-**metadata** | **object** |  | [optional] 
+**cache_id** | **str** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

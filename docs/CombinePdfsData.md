@@ -1,14 +1,13 @@
-# CreateSubmissionData
+# CombinePdfsData
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **test** | **bool** |  | [optional] 
-**data** | **object** |  | 
-**html** | **str** |  | [optional] 
-**css** | **str** |  | [optional] 
+**source_pdfs** | **list[object]** |  | 
 **metadata** | **object** |  | [optional] 
-**data_requests** | [**list[CreateSubmissionDataRequestData]**](CreateSubmissionDataRequestData.md) |  | [optional] 
+**expires_in** | **int** |  | [optional] 
+**delete_custom_files** | **bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

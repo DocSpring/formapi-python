@@ -15,12 +15,12 @@ from __future__ import absolute_import
 import unittest
 
 import form_api
-from form_api.models.create_submission_data_batch_v1 import CreateSubmissionDataBatchV1  # noqa: E501
+from form_api.models.combine_pdfs_data import CombinePdfsData  # noqa: E501
 from form_api.rest import ApiException
 
 
-class TestCreateSubmissionDataBatchV1(unittest.TestCase):
-    """CreateSubmissionDataBatchV1 unit test stubs"""
+class TestCombinePdfsData(unittest.TestCase):
+    """CombinePdfsData unit test stubs"""
 
     def setUp(self):
         pass
@@ -28,10 +28,10 @@ class TestCreateSubmissionDataBatchV1(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testCreateSubmissionDataBatchV1(self):
-        """Test CreateSubmissionDataBatchV1"""
+    def testCombinePdfsData(self):
+        """Test CombinePdfsData"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = form_api.models.create_submission_data_batch_v1.CreateSubmissionDataBatchV1()  # noqa: E501
+        # model = form_api.models.combine_pdfs_data.CombinePdfsData()  # noqa: E501
         pass
 
 

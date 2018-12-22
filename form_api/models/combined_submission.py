@@ -34,6 +34,7 @@ class CombinedSubmission(object):
         'metadata': 'object',
         'expired': 'bool',
         'expires_at': 'str',
+        'source_pdfs': 'list[object]',
         'download_url': 'str',
         'submission_ids': 'list[str]',
         'id': 'str',
@@ -45,6 +46,7 @@ class CombinedSubmission(object):
         'metadata': 'metadata',
         'expired': 'expired',
         'expires_at': 'expires_at',
+        'source_pdfs': 'source_pdfs',
         'download_url': 'download_url',
         'submission_ids': 'submission_ids',
         'id': 'id',
@@ -52,12 +54,13 @@ class CombinedSubmission(object):
         'actions': 'actions'
     }
 
-    def __init__(self, metadata=None, expired=None, expires_at=None, download_url=None, submission_ids=None, id=None, state=None, actions=None):  # noqa: E501
+    def __init__(self, metadata=None, expired=None, expires_at=None, source_pdfs=None, download_url=None, submission_ids=None, id=None, state=None, actions=None):  # noqa: E501
         """CombinedSubmission - a model defined in OpenAPI"""  # noqa: E501
 
         self._metadata = None
         self._expired = None
         self._expires_at = None
+        self._source_pdfs = None
         self._download_url = None
         self._submission_ids = None
         self._id = None
@@ -71,6 +74,8 @@ class CombinedSubmission(object):
             self.expired = expired
         if expires_at is not None:
             self.expires_at = expires_at
+        if source_pdfs is not None:
+            self.source_pdfs = source_pdfs
         if download_url is not None:
             self.download_url = download_url
         if submission_ids is not None:
@@ -144,6 +149,27 @@ class CombinedSubmission(object):
         """
 
         self._expires_at = expires_at
+
+    @property
+    def source_pdfs(self):
+        """Gets the source_pdfs of this CombinedSubmission.  # noqa: E501
+
+
+        :return: The source_pdfs of this CombinedSubmission.  # noqa: E501
+        :rtype: list[object]
+        """
+        return self._source_pdfs
+
+    @source_pdfs.setter
+    def source_pdfs(self, source_pdfs):
+        """Sets the source_pdfs of this CombinedSubmission.
+
+
+        :param source_pdfs: The source_pdfs of this CombinedSubmission.  # noqa: E501
+        :type: list[object]
+        """
+
+        self._source_pdfs = source_pdfs
 
     @property
     def download_url(self):

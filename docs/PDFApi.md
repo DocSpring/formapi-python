@@ -6,14 +6,18 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**batch_generate_pdf_v1**](PDFApi.md#batch_generate_pdf_v1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 [**batch_generate_pdfs**](PDFApi.md#batch_generate_pdfs) | **POST** /submissions/batches | Generates multiple PDFs
+[**combine_pdfs**](PDFApi.md#combine_pdfs) | **POST** /combined_submissions?v&#x3D;2 | Merge submission PDFs, template PDFs, or custom files
 [**combine_submissions**](PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
+[**create_custom_file_from_upload**](PDFApi.md#create_custom_file_from_upload) | **POST** /custom_files | Create a new custom file from a cached presign upload
 [**create_data_request_token**](PDFApi.md#create_data_request_token) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
-[**create_template**](PDFApi.md#create_template) | **POST** /templates | Upload a new PDF template
+[**create_template**](PDFApi.md#create_template) | **POST** /templates | Upload a new PDF template with a file upload
+[**create_template_from_upload**](PDFApi.md#create_template_from_upload) | **POST** /templates?v&#x3D;2 | Create a new PDF template from a cached presign upload
 [**expire_combined_submission**](PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generate_pdf**](PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**get_combined_submission**](PDFApi.md#get_combined_submission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
 [**get_data_request**](PDFApi.md#get_data_request) | **GET** /data_requests/{data_request_id} | Look up a submission data request
+[**get_presign_url**](PDFApi.md#get_presign_url) | **GET** /uploads/presign | Get a presigned URL so that you can upload a file to our AWS S3 bucket
 [**get_submission**](PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
 [**get_submission_batch**](PDFApi.md#get_submission_batch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 [**get_template**](PDFApi.md#get_template) | **GET** /templates/{template_id} | Check the status of an uploaded template
@@ -24,7 +28,7 @@ Method | HTTP request | Description
 
 
 # **batch_generate_pdf_v1**
-> list[CreateSubmissionResponse] batch_generate_pdf_v1(template_id, create_submission_data_batch_v1)
+> list[CreateSubmissionResponse] batch_generate_pdf_v1(template_id, request_body)
 
 Generates multiple PDFs
 
@@ -46,11 +50,11 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
 template_id = 'tpl_000000000000000001' # str | 
-create_submission_data_batch_v1 = NULL # list[CreateSubmissionDataBatchV1] | 
+request_body = NULL # list[object] | 
 
 try:
     # Generates multiple PDFs
-    api_response = api_instance.batch_generate_pdf_v1(template_id, create_submission_data_batch_v1)
+    api_response = api_instance.batch_generate_pdf_v1(template_id, request_body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->batch_generate_pdf_v1: %s\n" % e)
@@ -61,7 +65,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **str**|  | 
- **create_submission_data_batch_v1** | [**list[CreateSubmissionDataBatchV1]**](list.md)|  | 
+ **request_body** | [**list[object]**](list.md)|  | 
 
 ### Return type
 
@@ -131,6 +135,59 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **combine_pdfs**
+> CreateCombinedSubmissionResponse combine_pdfs(combine_pdfs_data)
+
+Merge submission PDFs, template PDFs, or custom files
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+combine_pdfs_data = form_api.CombinePdfsData() # CombinePdfsData | 
+
+try:
+    # Merge submission PDFs, template PDFs, or custom files
+    api_response = api_instance.combine_pdfs(combine_pdfs_data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->combine_pdfs: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **combine_pdfs_data** | [**CombinePdfsData**](CombinePdfsData.md)|  | 
+
+### Return type
+
+[**CreateCombinedSubmissionResponse**](CreateCombinedSubmissionResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **combine_submissions**
 > CreateCombinedSubmissionResponse combine_submissions(combined_submission_data)
 
@@ -172,6 +229,59 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateCombinedSubmissionResponse**](CreateCombinedSubmissionResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_custom_file_from_upload**
+> CreateCustomFileResponse create_custom_file_from_upload(create_custom_file_data)
+
+Create a new custom file from a cached presign upload
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+create_custom_file_data = form_api.CreateCustomFileData() # CreateCustomFileData | 
+
+try:
+    # Create a new custom file from a cached presign upload
+    api_response = api_instance.create_custom_file_from_upload(create_custom_file_data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->create_custom_file_from_upload: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_custom_file_data** | [**CreateCustomFileData**](CreateCustomFileData.md)|  | 
+
+### Return type
+
+[**CreateCustomFileResponse**](CreateCustomFileResponse.md)
 
 ### Authorization
 
@@ -240,7 +350,7 @@ Name | Type | Description  | Notes
 # **create_template**
 > PendingTemplate create_template(template_document, template_name)
 
-Upload a new PDF template
+Upload a new PDF template with a file upload
 
 ### Example
 
@@ -263,7 +373,7 @@ template_document = '/path/to/file' # file |
 template_name = 'template_name_example' # str | 
 
 try:
-    # Upload a new PDF template
+    # Upload a new PDF template with a file upload
     api_response = api_instance.create_template(template_document, template_name)
     pprint(api_response)
 except ApiException as e:
@@ -288,6 +398,59 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_template_from_upload**
+> PendingTemplate create_template_from_upload(create_template_data)
+
+Create a new PDF template from a cached presign upload
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+create_template_data = form_api.CreateTemplateData() # CreateTemplateData | 
+
+try:
+    # Create a new PDF template from a cached presign upload
+    api_response = api_instance.create_template_from_upload(create_template_data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->create_template_from_upload: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_template_data** | [**CreateTemplateData**](CreateTemplateData.md)|  | 
+
+### Return type
+
+[**PendingTemplate**](PendingTemplate.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -399,7 +562,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **generate_pdf**
-> CreateSubmissionResponse generate_pdf(template_id, create_submission_data)
+> CreateSubmissionResponse generate_pdf(template_id, submission_data)
 
 Generates a new PDF
 
@@ -421,11 +584,11 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
 template_id = 'tpl_000000000000000001' # str | 
-create_submission_data = form_api.CreateSubmissionData() # CreateSubmissionData | 
+submission_data = form_api.SubmissionData() # SubmissionData | 
 
 try:
     # Generates a new PDF
-    api_response = api_instance.generate_pdf(template_id, create_submission_data)
+    api_response = api_instance.generate_pdf(template_id, submission_data)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->generate_pdf: %s\n" % e)
@@ -436,7 +599,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **str**|  | 
- **create_submission_data** | [**CreateSubmissionData**](CreateSubmissionData.md)|  | 
+ **submission_data** | [**SubmissionData**](SubmissionData.md)|  | 
 
 ### Return type
 
@@ -559,6 +722,55 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_presign_url**
+> dict(str, object) get_presign_url()
+
+Get a presigned URL so that you can upload a file to our AWS S3 bucket
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+
+try:
+    # Get a presigned URL so that you can upload a file to our AWS S3 bucket
+    api_response = api_instance.get_presign_url()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->get_presign_url: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**dict(str, object)**
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_submission**
 > Submission get_submission(submission_id)
 
@@ -634,7 +846,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-submission_batch_id = 'sba_000000000000000001' # str | 
+submission_batch_id = 'sbb_000000000000000001' # str | 
 include_submissions = true # bool |  (optional)
 
 try:

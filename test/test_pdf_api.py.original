@@ -30,7 +30,7 @@ class TestPDFApi(unittest.TestCase):
         configuration = form_api.Configuration()
         configuration.username = 'api_token123'
         configuration.password = 'testsecret123'
-        configuration.host = 'localhost:31337/api/v1'
+        configuration.host = 'api.formapi.local:31337/api/v1'
         configuration.scheme = 'http'
 
         # create an instance of the API class
@@ -45,8 +45,8 @@ class TestPDFApi(unittest.TestCase):
         Generates multiple PDFs  # noqa: E501
         """
         template_id = 'tpl_000000000000000001' # str | 
-        create_submission_data_batch_v1 = NULL # list[CreateSubmissionDataBatchV1] | 
-        api_response = self.api.batch_generate_pdf_v1(template_id, create_submission_data_batch_v1)
+        request_body = NULL # list[object] | 
+        api_response = self.api.batch_generate_pdf_v1(template_id, request_body)
     def test_batch_generate_pdfs(self):
         """Test case for batch_generate_pdfs
 
@@ -54,6 +54,13 @@ class TestPDFApi(unittest.TestCase):
         """
         submission_batch_data = form_api.SubmissionBatchData() # SubmissionBatchData | 
         api_response = self.api.batch_generate_pdfs(submission_batch_data)
+    def test_combine_pdfs(self):
+        """Test case for combine_pdfs
+
+        Merge submission PDFs, template PDFs, or custom files  # noqa: E501
+        """
+        combine_pdfs_data = form_api.CombinePdfsData() # CombinePdfsData | 
+        api_response = self.api.combine_pdfs(combine_pdfs_data)
     def test_combine_submissions(self):
         """Test case for combine_submissions
 
@@ -61,6 +68,13 @@ class TestPDFApi(unittest.TestCase):
         """
         combined_submission_data = form_api.CombinedSubmissionData() # CombinedSubmissionData | 
         api_response = self.api.combine_submissions(combined_submission_data)
+    def test_create_custom_file_from_upload(self):
+        """Test case for create_custom_file_from_upload
+
+        Create a new custom file from a cached presign upload  # noqa: E501
+        """
+        create_custom_file_data = form_api.CreateCustomFileData() # CreateCustomFileData | 
+        api_response = self.api.create_custom_file_from_upload(create_custom_file_data)
     def test_create_data_request_token(self):
         """Test case for create_data_request_token
 
@@ -71,11 +85,18 @@ class TestPDFApi(unittest.TestCase):
     def test_create_template(self):
         """Test case for create_template
 
-        Upload a new PDF template  # noqa: E501
+        Upload a new PDF template with a file upload  # noqa: E501
         """
         template_document = '/path/to/file' # file | 
         template_name = 'template_name_example' # str | 
         api_response = self.api.create_template(template_document, template_name)
+    def test_create_template_from_upload(self):
+        """Test case for create_template_from_upload
+
+        Create a new PDF template from a cached presign upload  # noqa: E501
+        """
+        create_template_data = form_api.CreateTemplateData() # CreateTemplateData | 
+        api_response = self.api.create_template_from_upload(create_template_data)
     def test_expire_combined_submission(self):
         """Test case for expire_combined_submission
 
@@ -96,8 +117,8 @@ class TestPDFApi(unittest.TestCase):
         Generates a new PDF  # noqa: E501
         """
         template_id = 'tpl_000000000000000001' # str | 
-        create_submission_data = form_api.CreateSubmissionData() # CreateSubmissionData | 
-        api_response = self.api.generate_pdf(template_id, create_submission_data)
+        submission_data = form_api.SubmissionData() # SubmissionData | 
+        api_response = self.api.generate_pdf(template_id, submission_data)
     def test_get_combined_submission(self):
         """Test case for get_combined_submission
 
@@ -112,6 +133,12 @@ class TestPDFApi(unittest.TestCase):
         """
         data_request_id = 'drq_000000000000000001' # str | 
         api_response = self.api.get_data_request(data_request_id)
+    def test_get_presign_url(self):
+        """Test case for get_presign_url
+
+        Get a presigned URL so that you can upload a file to our AWS S3 bucket  # noqa: E501
+        """
+        api_response = self.api.get_presign_url()
     def test_get_submission(self):
         """Test case for get_submission
 
@@ -124,7 +151,7 @@ class TestPDFApi(unittest.TestCase):
 
         Check the status of a submission batch job  # noqa: E501
         """
-        submission_batch_id = 'sba_000000000000000001' # str | 
+        submission_batch_id = 'sbb_000000000000000001' # str | 
         include_submissions = true # bool |  (optional)
         api_response = self.api.get_submission_batch(submission_batch_id, include_submissions=include_submissions)
     def test_get_template(self):

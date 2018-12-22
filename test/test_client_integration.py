@@ -31,7 +31,7 @@ class TestClient(unittest.TestCase):
         configuration = form_api.Configuration()
         configuration.api_token_id = 'api_token123'
         configuration.api_token_secret = 'testsecret123'
-        configuration.host = 'localhost:31337/api/v1'
+        configuration.host = 'api.formapi.local:31337/api/v1'
 
         # create an instance of the API class
         self.client = form_api.Client(form_api.ApiClient(configuration))
@@ -112,7 +112,7 @@ class TestClient(unittest.TestCase):
 
             self.assertEquals(response.status, 'success')
             batch = response.submission_batch
-            self.assertRegexpMatches(batch.id, '^sba_')
+            self.assertRegexpMatches(batch.id, '^sbb_')
             self.assertEquals(batch.state, 'processed')
             self.assertEquals(batch.metadata['user_id'], 123)
             self.assertEquals(batch.total_count, 2)
