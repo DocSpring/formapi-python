@@ -145,7 +145,8 @@ class TestPDFApi(unittest.TestCase):
         Check the status of a PDF  # noqa: E501
         """
         submission_id = 'sub_000000000000000001' # str | 
-        api_response = self.api.get_submission(submission_id)
+        include_data = false # bool |  (optional)
+        api_response = self.api.get_submission(submission_id, include_data=include_data)
     def test_get_submission_batch(self):
         """Test case for get_submission_batch
 

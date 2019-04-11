@@ -1406,6 +1406,7 @@ class PDFApi(object):
 
         :param async_req bool
         :param str submission_id: (required)
+        :param bool include_data:
         :return: Submission
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1427,6 +1428,7 @@ class PDFApi(object):
 
         :param async_req bool
         :param str submission_id: (required)
+        :param bool include_data:
         :return: Submission
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1434,7 +1436,7 @@ class PDFApi(object):
 
         local_var_params = locals()
 
-        all_params = ['submission_id']  # noqa: E501
+        all_params = ['submission_id', 'include_data']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1460,6 +1462,8 @@ class PDFApi(object):
             path_params['submission_id'] = local_var_params['submission_id']  # noqa: E501
 
         query_params = []
+        if 'include_data' in local_var_params:
+            query_params.append(('include_data', local_var_params['include_data']))  # noqa: E501
 
         header_params = {}
 

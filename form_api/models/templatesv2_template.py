@@ -32,75 +32,80 @@ class Templatesv2Template(object):
     """
     openapi_types = {
         'expiration_interval': 'str',
-        'public_web_form': 'bool',
         'webhook_url': 'str',
-        'expire_submissions': 'bool',
         'expire_after': 'float',
         'allow_additional_properties': 'bool',
         'document': 'Templatesv2TemplateDocument',
-        'name': 'str',
         'public_submissions': 'bool',
         'slack_webhook_url': 'str',
-        'redirect_url': 'str',
-        'blockchain_timestamp_verification': 'bool'
+        'blockchain_timestamp_verification': 'bool',
+        'public_web_form': 'bool',
+        'editable_submissions': 'bool',
+        'expire_submissions': 'bool',
+        'name': 'str',
+        'redirect_url': 'str'
     }
 
     attribute_map = {
         'expiration_interval': 'expiration_interval',
-        'public_web_form': 'public_web_form',
         'webhook_url': 'webhook_url',
-        'expire_submissions': 'expire_submissions',
         'expire_after': 'expire_after',
         'allow_additional_properties': 'allow_additional_properties',
         'document': 'document',
-        'name': 'name',
         'public_submissions': 'public_submissions',
         'slack_webhook_url': 'slack_webhook_url',
-        'redirect_url': 'redirect_url',
-        'blockchain_timestamp_verification': 'blockchain_timestamp_verification'
+        'blockchain_timestamp_verification': 'blockchain_timestamp_verification',
+        'public_web_form': 'public_web_form',
+        'editable_submissions': 'editable_submissions',
+        'expire_submissions': 'expire_submissions',
+        'name': 'name',
+        'redirect_url': 'redirect_url'
     }
 
-    def __init__(self, expiration_interval=None, public_web_form=None, webhook_url=None, expire_submissions=None, expire_after=None, allow_additional_properties=None, document=None, name=None, public_submissions=None, slack_webhook_url=None, redirect_url=None, blockchain_timestamp_verification=None):  # noqa: E501
+    def __init__(self, expiration_interval=None, webhook_url=None, expire_after=None, allow_additional_properties=None, document=None, public_submissions=None, slack_webhook_url=None, blockchain_timestamp_verification=None, public_web_form=None, editable_submissions=None, expire_submissions=None, name=None, redirect_url=None):  # noqa: E501
         """Templatesv2Template - a model defined in OpenAPI"""  # noqa: E501
 
         self._expiration_interval = None
-        self._public_web_form = None
         self._webhook_url = None
-        self._expire_submissions = None
         self._expire_after = None
         self._allow_additional_properties = None
         self._document = None
-        self._name = None
         self._public_submissions = None
         self._slack_webhook_url = None
-        self._redirect_url = None
         self._blockchain_timestamp_verification = None
+        self._public_web_form = None
+        self._editable_submissions = None
+        self._expire_submissions = None
+        self._name = None
+        self._redirect_url = None
         self.discriminator = None
 
         if expiration_interval is not None:
             self.expiration_interval = expiration_interval
-        if public_web_form is not None:
-            self.public_web_form = public_web_form
         if webhook_url is not None:
             self.webhook_url = webhook_url
-        if expire_submissions is not None:
-            self.expire_submissions = expire_submissions
         if expire_after is not None:
             self.expire_after = expire_after
         if allow_additional_properties is not None:
             self.allow_additional_properties = allow_additional_properties
         if document is not None:
             self.document = document
-        if name is not None:
-            self.name = name
         if public_submissions is not None:
             self.public_submissions = public_submissions
         if slack_webhook_url is not None:
             self.slack_webhook_url = slack_webhook_url
-        if redirect_url is not None:
-            self.redirect_url = redirect_url
         if blockchain_timestamp_verification is not None:
             self.blockchain_timestamp_verification = blockchain_timestamp_verification
+        if public_web_form is not None:
+            self.public_web_form = public_web_form
+        if editable_submissions is not None:
+            self.editable_submissions = editable_submissions
+        if expire_submissions is not None:
+            self.expire_submissions = expire_submissions
+        if name is not None:
+            self.name = name
+        if redirect_url is not None:
+            self.redirect_url = redirect_url
 
     @property
     def expiration_interval(self):
@@ -130,27 +135,6 @@ class Templatesv2Template(object):
         self._expiration_interval = expiration_interval
 
     @property
-    def public_web_form(self):
-        """Gets the public_web_form of this Templatesv2Template.  # noqa: E501
-
-
-        :return: The public_web_form of this Templatesv2Template.  # noqa: E501
-        :rtype: bool
-        """
-        return self._public_web_form
-
-    @public_web_form.setter
-    def public_web_form(self, public_web_form):
-        """Sets the public_web_form of this Templatesv2Template.
-
-
-        :param public_web_form: The public_web_form of this Templatesv2Template.  # noqa: E501
-        :type: bool
-        """
-
-        self._public_web_form = public_web_form
-
-    @property
     def webhook_url(self):
         """Gets the webhook_url of this Templatesv2Template.  # noqa: E501
 
@@ -170,27 +154,6 @@ class Templatesv2Template(object):
         """
 
         self._webhook_url = webhook_url
-
-    @property
-    def expire_submissions(self):
-        """Gets the expire_submissions of this Templatesv2Template.  # noqa: E501
-
-
-        :return: The expire_submissions of this Templatesv2Template.  # noqa: E501
-        :rtype: bool
-        """
-        return self._expire_submissions
-
-    @expire_submissions.setter
-    def expire_submissions(self, expire_submissions):
-        """Sets the expire_submissions of this Templatesv2Template.
-
-
-        :param expire_submissions: The expire_submissions of this Templatesv2Template.  # noqa: E501
-        :type: bool
-        """
-
-        self._expire_submissions = expire_submissions
 
     @property
     def expire_after(self):
@@ -256,27 +219,6 @@ class Templatesv2Template(object):
         self._document = document
 
     @property
-    def name(self):
-        """Gets the name of this Templatesv2Template.  # noqa: E501
-
-
-        :return: The name of this Templatesv2Template.  # noqa: E501
-        :rtype: str
-        """
-        return self._name
-
-    @name.setter
-    def name(self, name):
-        """Sets the name of this Templatesv2Template.
-
-
-        :param name: The name of this Templatesv2Template.  # noqa: E501
-        :type: str
-        """
-
-        self._name = name
-
-    @property
     def public_submissions(self):
         """Gets the public_submissions of this Templatesv2Template.  # noqa: E501
 
@@ -319,27 +261,6 @@ class Templatesv2Template(object):
         self._slack_webhook_url = slack_webhook_url
 
     @property
-    def redirect_url(self):
-        """Gets the redirect_url of this Templatesv2Template.  # noqa: E501
-
-
-        :return: The redirect_url of this Templatesv2Template.  # noqa: E501
-        :rtype: str
-        """
-        return self._redirect_url
-
-    @redirect_url.setter
-    def redirect_url(self, redirect_url):
-        """Sets the redirect_url of this Templatesv2Template.
-
-
-        :param redirect_url: The redirect_url of this Templatesv2Template.  # noqa: E501
-        :type: str
-        """
-
-        self._redirect_url = redirect_url
-
-    @property
     def blockchain_timestamp_verification(self):
         """Gets the blockchain_timestamp_verification of this Templatesv2Template.  # noqa: E501
 
@@ -359,6 +280,111 @@ class Templatesv2Template(object):
         """
 
         self._blockchain_timestamp_verification = blockchain_timestamp_verification
+
+    @property
+    def public_web_form(self):
+        """Gets the public_web_form of this Templatesv2Template.  # noqa: E501
+
+
+        :return: The public_web_form of this Templatesv2Template.  # noqa: E501
+        :rtype: bool
+        """
+        return self._public_web_form
+
+    @public_web_form.setter
+    def public_web_form(self, public_web_form):
+        """Sets the public_web_form of this Templatesv2Template.
+
+
+        :param public_web_form: The public_web_form of this Templatesv2Template.  # noqa: E501
+        :type: bool
+        """
+
+        self._public_web_form = public_web_form
+
+    @property
+    def editable_submissions(self):
+        """Gets the editable_submissions of this Templatesv2Template.  # noqa: E501
+
+
+        :return: The editable_submissions of this Templatesv2Template.  # noqa: E501
+        :rtype: bool
+        """
+        return self._editable_submissions
+
+    @editable_submissions.setter
+    def editable_submissions(self, editable_submissions):
+        """Sets the editable_submissions of this Templatesv2Template.
+
+
+        :param editable_submissions: The editable_submissions of this Templatesv2Template.  # noqa: E501
+        :type: bool
+        """
+
+        self._editable_submissions = editable_submissions
+
+    @property
+    def expire_submissions(self):
+        """Gets the expire_submissions of this Templatesv2Template.  # noqa: E501
+
+
+        :return: The expire_submissions of this Templatesv2Template.  # noqa: E501
+        :rtype: bool
+        """
+        return self._expire_submissions
+
+    @expire_submissions.setter
+    def expire_submissions(self, expire_submissions):
+        """Sets the expire_submissions of this Templatesv2Template.
+
+
+        :param expire_submissions: The expire_submissions of this Templatesv2Template.  # noqa: E501
+        :type: bool
+        """
+
+        self._expire_submissions = expire_submissions
+
+    @property
+    def name(self):
+        """Gets the name of this Templatesv2Template.  # noqa: E501
+
+
+        :return: The name of this Templatesv2Template.  # noqa: E501
+        :rtype: str
+        """
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        """Sets the name of this Templatesv2Template.
+
+
+        :param name: The name of this Templatesv2Template.  # noqa: E501
+        :type: str
+        """
+
+        self._name = name
+
+    @property
+    def redirect_url(self):
+        """Gets the redirect_url of this Templatesv2Template.  # noqa: E501
+
+
+        :return: The redirect_url of this Templatesv2Template.  # noqa: E501
+        :rtype: str
+        """
+        return self._redirect_url
+
+    @redirect_url.setter
+    def redirect_url(self, redirect_url):
+        """Sets the redirect_url of this Templatesv2Template.
+
+
+        :param redirect_url: The redirect_url of this Templatesv2Template.  # noqa: E501
+        :type: str
+        """
+
+        self._redirect_url = redirect_url
 
     def to_dict(self):
         """Returns the model properties as a dict"""

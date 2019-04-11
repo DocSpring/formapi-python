@@ -66,6 +66,8 @@ class CreateCustomFileData(object):
         """
         if cache_id is None:
             raise ValueError("Invalid value for `cache_id`, must not be `None`")  # noqa: E501
+        if cache_id is not None and len(cache_id) < 1:
+            raise ValueError("Invalid value for `cache_id`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._cache_id = cache_id
 

@@ -39,6 +39,7 @@ class PendingTemplate(object):
         'slack_webhook_url': 'str',
         'blockchain_timestamp_verification': 'bool',
         'public_web_form': 'bool',
+        'editable_submissions': 'bool',
         'expire_submissions': 'bool',
         'name': 'str',
         'template_type': 'str',
@@ -55,6 +56,7 @@ class PendingTemplate(object):
         'slack_webhook_url': 'slack_webhook_url',
         'blockchain_timestamp_verification': 'blockchain_timestamp_verification',
         'public_web_form': 'public_web_form',
+        'editable_submissions': 'editable_submissions',
         'expire_submissions': 'expire_submissions',
         'name': 'name',
         'template_type': 'template_type',
@@ -62,7 +64,7 @@ class PendingTemplate(object):
         'redirect_url': 'redirect_url'
     }
 
-    def __init__(self, expiration_interval=None, webhook_url=None, expire_after=None, allow_additional_properties=None, public_submissions=None, slack_webhook_url=None, blockchain_timestamp_verification=None, public_web_form=None, expire_submissions=None, name=None, template_type=None, id=None, redirect_url=None):  # noqa: E501
+    def __init__(self, expiration_interval=None, webhook_url=None, expire_after=None, allow_additional_properties=None, public_submissions=None, slack_webhook_url=None, blockchain_timestamp_verification=None, public_web_form=None, editable_submissions=None, expire_submissions=None, name=None, template_type=None, id=None, redirect_url=None):  # noqa: E501
         """PendingTemplate - a model defined in OpenAPI"""  # noqa: E501
 
         self._expiration_interval = None
@@ -73,6 +75,7 @@ class PendingTemplate(object):
         self._slack_webhook_url = None
         self._blockchain_timestamp_verification = None
         self._public_web_form = None
+        self._editable_submissions = None
         self._expire_submissions = None
         self._name = None
         self._template_type = None
@@ -96,6 +99,8 @@ class PendingTemplate(object):
             self.blockchain_timestamp_verification = blockchain_timestamp_verification
         if public_web_form is not None:
             self.public_web_form = public_web_form
+        if editable_submissions is not None:
+            self.editable_submissions = editable_submissions
         if expire_submissions is not None:
             self.expire_submissions = expire_submissions
         if name is not None:
@@ -280,6 +285,27 @@ class PendingTemplate(object):
         """
 
         self._public_web_form = public_web_form
+
+    @property
+    def editable_submissions(self):
+        """Gets the editable_submissions of this PendingTemplate.  # noqa: E501
+
+
+        :return: The editable_submissions of this PendingTemplate.  # noqa: E501
+        :rtype: bool
+        """
+        return self._editable_submissions
+
+    @editable_submissions.setter
+    def editable_submissions(self, editable_submissions):
+        """Sets the editable_submissions of this PendingTemplate.
+
+
+        :param editable_submissions: The editable_submissions of this PendingTemplate.  # noqa: E501
+        :type: bool
+        """
+
+        self._editable_submissions = editable_submissions
 
     @property
     def expire_submissions(self):

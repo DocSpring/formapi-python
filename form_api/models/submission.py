@@ -33,6 +33,7 @@ class Submission(object):
     openapi_types = {
         'id': 'str',
         'test': 'bool',
+        'editable': 'bool',
         'expired': 'bool',
         'expires_at': 'str',
         'processed_at': 'str',
@@ -47,6 +48,7 @@ class Submission(object):
     attribute_map = {
         'id': 'id',
         'test': 'test',
+        'editable': 'editable',
         'expired': 'expired',
         'expires_at': 'expires_at',
         'processed_at': 'processed_at',
@@ -58,11 +60,12 @@ class Submission(object):
         'actions': 'actions'
     }
 
-    def __init__(self, id=None, test=None, expired=None, expires_at=None, processed_at=None, state=None, metadata=None, download_url=None, batch_id=None, data_requests=None, actions=None):  # noqa: E501
+    def __init__(self, id=None, test=None, editable=None, expired=None, expires_at=None, processed_at=None, state=None, metadata=None, download_url=None, batch_id=None, data_requests=None, actions=None):  # noqa: E501
         """Submission - a model defined in OpenAPI"""  # noqa: E501
 
         self._id = None
         self._test = None
+        self._editable = None
         self._expired = None
         self._expires_at = None
         self._processed_at = None
@@ -76,6 +79,8 @@ class Submission(object):
 
         self.id = id
         self.test = test
+        if editable is not None:
+            self.editable = editable
         self.expired = expired
         if expires_at is not None:
             self.expires_at = expires_at
@@ -138,6 +143,27 @@ class Submission(object):
             raise ValueError("Invalid value for `test`, must not be `None`")  # noqa: E501
 
         self._test = test
+
+    @property
+    def editable(self):
+        """Gets the editable of this Submission.  # noqa: E501
+
+
+        :return: The editable of this Submission.  # noqa: E501
+        :rtype: bool
+        """
+        return self._editable
+
+    @editable.setter
+    def editable(self, editable):
+        """Sets the editable of this Submission.
+
+
+        :param editable: The editable of this Submission.  # noqa: E501
+        :type: bool
+        """
+
+        self._editable = editable
 
     @property
     def expired(self):
@@ -224,7 +250,7 @@ class Submission(object):
         """
         if state is None:
             raise ValueError("Invalid value for `state`, must not be `None`")  # noqa: E501
-        allowed_values = ["pending", "processed", "invalid_data", "error", "image_download_failed", "image_processing_failed", "waiting_for_data_requests"]  # noqa: E501
+        allowed_values = ["pending", "processed", "invalid_data", "error", "image_download_failed", "image_processing_failed", "waiting_for_data_requests", "liquid_syntax_error"]  # noqa: E501
         if state not in allowed_values:
             raise ValueError(
                 "Invalid value for `state` ({0}), must be one of {1}"  # noqa: E501

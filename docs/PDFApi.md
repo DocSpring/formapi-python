@@ -772,7 +772,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_submission**
-> Submission get_submission(submission_id)
+> Submission get_submission(submission_id, include_data=include_data)
 
 Check the status of a PDF
 
@@ -794,10 +794,11 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
 submission_id = 'sub_000000000000000001' # str | 
+include_data = false # bool |  (optional)
 
 try:
     # Check the status of a PDF
-    api_response = api_instance.get_submission(submission_id)
+    api_response = api_instance.get_submission(submission_id, include_data=include_data)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->get_submission: %s\n" % e)
@@ -808,6 +809,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **submission_id** | **str**|  | 
+ **include_data** | **bool**|  | [optional] 
 
 ### Return type
 
