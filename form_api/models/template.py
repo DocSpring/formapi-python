@@ -37,7 +37,6 @@ class Template(object):
         'allow_additional_properties': 'bool',
         'public_submissions': 'bool',
         'slack_webhook_url': 'str',
-        'blockchain_timestamp_verification': 'bool',
         'public_web_form': 'bool',
         'editable_submissions': 'bool',
         'expire_submissions': 'bool',
@@ -55,7 +54,6 @@ class Template(object):
         'allow_additional_properties': 'allow_additional_properties',
         'public_submissions': 'public_submissions',
         'slack_webhook_url': 'slack_webhook_url',
-        'blockchain_timestamp_verification': 'blockchain_timestamp_verification',
         'public_web_form': 'public_web_form',
         'editable_submissions': 'editable_submissions',
         'expire_submissions': 'expire_submissions',
@@ -66,7 +64,7 @@ class Template(object):
         'redirect_url': 'redirect_url'
     }
 
-    def __init__(self, expiration_interval=None, webhook_url=None, expire_after=None, allow_additional_properties=None, public_submissions=None, slack_webhook_url=None, blockchain_timestamp_verification=None, public_web_form=None, editable_submissions=None, expire_submissions=None, name=None, template_type=None, id=None, page_dimensions=None, redirect_url=None):  # noqa: E501
+    def __init__(self, expiration_interval=None, webhook_url=None, expire_after=None, allow_additional_properties=None, public_submissions=None, slack_webhook_url=None, public_web_form=None, editable_submissions=None, expire_submissions=None, name=None, template_type=None, id=None, page_dimensions=None, redirect_url=None):  # noqa: E501
         """Template - a model defined in OpenAPI"""  # noqa: E501
 
         self._expiration_interval = None
@@ -75,7 +73,6 @@ class Template(object):
         self._allow_additional_properties = None
         self._public_submissions = None
         self._slack_webhook_url = None
-        self._blockchain_timestamp_verification = None
         self._public_web_form = None
         self._editable_submissions = None
         self._expire_submissions = None
@@ -98,8 +95,6 @@ class Template(object):
             self.public_submissions = public_submissions
         if slack_webhook_url is not None:
             self.slack_webhook_url = slack_webhook_url
-        if blockchain_timestamp_verification is not None:
-            self.blockchain_timestamp_verification = blockchain_timestamp_verification
         if public_web_form is not None:
             self.public_web_form = public_web_form
         if editable_submissions is not None:
@@ -248,27 +243,6 @@ class Template(object):
         """
 
         self._slack_webhook_url = slack_webhook_url
-
-    @property
-    def blockchain_timestamp_verification(self):
-        """Gets the blockchain_timestamp_verification of this Template.  # noqa: E501
-
-
-        :return: The blockchain_timestamp_verification of this Template.  # noqa: E501
-        :rtype: bool
-        """
-        return self._blockchain_timestamp_verification
-
-    @blockchain_timestamp_verification.setter
-    def blockchain_timestamp_verification(self, blockchain_timestamp_verification):
-        """Sets the blockchain_timestamp_verification of this Template.
-
-
-        :param blockchain_timestamp_verification: The blockchain_timestamp_verification of this Template.  # noqa: E501
-        :type: bool
-        """
-
-        self._blockchain_timestamp_verification = blockchain_timestamp_verification
 
     @property
     def public_web_form(self):

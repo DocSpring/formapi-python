@@ -169,14 +169,15 @@ class TestPDFApi(unittest.TestCase):
         """
         template_id = 'tpl_000000000000000001' # str | 
         api_response = self.api.get_template_schema(template_id)
-    def test_get_templates(self):
-        """Test case for get_templates
+    def test_list_templates(self):
+        """Test case for list_templates
 
         Get a list of all templates  # noqa: E501
         """
+        query = '2' # str | Search By Name (optional)
         page = 2 # int | Default: 1 (optional)
         per_page = 1 # int | Default: 50 (optional)
-        api_response = self.api.get_templates(page=page, per_page=per_page)
+        api_response = self.api.list_templates(query=query, page=page, per_page=per_page)
     def test_test_authentication(self):
         """Test case for test_authentication
 

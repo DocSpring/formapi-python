@@ -1780,15 +1780,16 @@ class PDFApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_templates(self, **kwargs):  # noqa: E501
+    def list_templates(self, **kwargs):  # noqa: E501
         """Get a list of all templates  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_templates(async_req=True)
+        >>> thread = api.list_templates(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
+        :param str query: Search By Name
         :param int page: Default: 1
         :param int per_page: Default: 50
         :return: list[Template]
@@ -1797,20 +1798,21 @@ class PDFApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_templates_with_http_info(**kwargs)  # noqa: E501
+            return self.list_templates_with_http_info(**kwargs)  # noqa: E501
         else:
-            (data) = self.get_templates_with_http_info(**kwargs)  # noqa: E501
+            (data) = self.list_templates_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def get_templates_with_http_info(self, **kwargs):  # noqa: E501
+    def list_templates_with_http_info(self, **kwargs):  # noqa: E501
         """Get a list of all templates  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_templates_with_http_info(async_req=True)
+        >>> thread = api.list_templates_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
+        :param str query: Search By Name
         :param int page: Default: 1
         :param int per_page: Default: 50
         :return: list[Template]
@@ -1820,7 +1822,7 @@ class PDFApi(object):
 
         local_var_params = locals()
 
-        all_params = ['page', 'per_page']  # noqa: E501
+        all_params = ['query', 'page', 'per_page']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1830,22 +1832,24 @@ class PDFApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_templates" % key
+                    " to method list_templates" % key
                 )
             local_var_params[key] = val
         del local_var_params['kwargs']
 
         if 'page' in local_var_params and local_var_params['page'] < 1:  # noqa: E501
-            raise ValueError("Invalid value for parameter `page` when calling `get_templates`, must be a value greater than or equal to `1`")  # noqa: E501
+            raise ValueError("Invalid value for parameter `page` when calling `list_templates`, must be a value greater than or equal to `1`")  # noqa: E501
         if 'per_page' in local_var_params and local_var_params['per_page'] > 50:  # noqa: E501
-            raise ValueError("Invalid value for parameter `per_page` when calling `get_templates`, must be a value less than or equal to `50`")  # noqa: E501
+            raise ValueError("Invalid value for parameter `per_page` when calling `list_templates`, must be a value less than or equal to `50`")  # noqa: E501
         if 'per_page' in local_var_params and local_var_params['per_page'] < 1:  # noqa: E501
-            raise ValueError("Invalid value for parameter `per_page` when calling `get_templates`, must be a value greater than or equal to `1`")  # noqa: E501
+            raise ValueError("Invalid value for parameter `per_page` when calling `list_templates`, must be a value greater than or equal to `1`")  # noqa: E501
         collection_formats = {}
 
         path_params = {}
 
         query_params = []
+        if 'query' in local_var_params:
+            query_params.append(('query', local_var_params['query']))  # noqa: E501
         if 'page' in local_var_params:
             query_params.append(('page', local_var_params['page']))  # noqa: E501
         if 'per_page' in local_var_params:

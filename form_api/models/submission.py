@@ -32,6 +32,7 @@ class Submission(object):
     """
     openapi_types = {
         'id': 'str',
+        'template_id': 'str',
         'test': 'bool',
         'editable': 'bool',
         'expired': 'bool',
@@ -47,6 +48,7 @@ class Submission(object):
 
     attribute_map = {
         'id': 'id',
+        'template_id': 'template_id',
         'test': 'test',
         'editable': 'editable',
         'expired': 'expired',
@@ -60,10 +62,11 @@ class Submission(object):
         'actions': 'actions'
     }
 
-    def __init__(self, id=None, test=None, editable=None, expired=None, expires_at=None, processed_at=None, state=None, metadata=None, download_url=None, batch_id=None, data_requests=None, actions=None):  # noqa: E501
+    def __init__(self, id=None, template_id=None, test=None, editable=None, expired=None, expires_at=None, processed_at=None, state=None, metadata=None, download_url=None, batch_id=None, data_requests=None, actions=None):  # noqa: E501
         """Submission - a model defined in OpenAPI"""  # noqa: E501
 
         self._id = None
+        self._template_id = None
         self._test = None
         self._editable = None
         self._expired = None
@@ -78,6 +81,8 @@ class Submission(object):
         self.discriminator = None
 
         self.id = id
+        if template_id is not None:
+            self.template_id = template_id
         self.test = test
         if editable is not None:
             self.editable = editable
@@ -120,6 +125,27 @@ class Submission(object):
             raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
 
         self._id = id
+
+    @property
+    def template_id(self):
+        """Gets the template_id of this Submission.  # noqa: E501
+
+
+        :return: The template_id of this Submission.  # noqa: E501
+        :rtype: str
+        """
+        return self._template_id
+
+    @template_id.setter
+    def template_id(self, template_id):
+        """Sets the template_id of this Submission.
+
+
+        :param template_id: The template_id of this Submission.  # noqa: E501
+        :type: str
+        """
+
+        self._template_id = template_id
 
     @property
     def test(self):
@@ -250,7 +276,7 @@ class Submission(object):
         """
         if state is None:
             raise ValueError("Invalid value for `state`, must not be `None`")  # noqa: E501
-        allowed_values = ["pending", "processed", "invalid_data", "error", "image_download_failed", "image_processing_failed", "waiting_for_data_requests", "liquid_syntax_error"]  # noqa: E501
+        allowed_values = ["pending", "processed", "invalid_data", "error", "image_download_failed", "image_processing_failed", "waiting_for_data_requests", "liquid_syntax_error", "account_suspended", "license_revoked"]  # noqa: E501
         if state not in allowed_values:
             raise ValueError(
                 "Invalid value for `state` ({0}), must be one of {1}"  # noqa: E501
