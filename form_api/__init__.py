@@ -14,7 +14,7 @@
 
 from __future__ import absolute_import
 
-__version__ = "1.9.0"
+__version__ = "1.11.0"
 
 # import apis into sdk package
 from form_api.api.pdf_api import PDFApi
@@ -34,6 +34,7 @@ from form_api.models.combined_submission_data import CombinedSubmissionData
 from form_api.models.create_combined_submission_response import CreateCombinedSubmissionResponse
 from form_api.models.create_custom_file_data import CreateCustomFileData
 from form_api.models.create_custom_file_response import CreateCustomFileResponse
+from form_api.models.create_folder_data import CreateFolderData
 from form_api.models.create_submission_batch_response import CreateSubmissionBatchResponse
 from form_api.models.create_submission_batch_submissions_response import CreateSubmissionBatchSubmissionsResponse
 from form_api.models.create_submission_data_request_data import CreateSubmissionDataRequestData
@@ -43,8 +44,13 @@ from form_api.models.create_submission_response import CreateSubmissionResponse
 from form_api.models.create_template_data import CreateTemplateData
 from form_api.models.custom_file import CustomFile
 from form_api.models.error import Error
+from form_api.models.folder import Folder
+from form_api.models.folders_folder import FoldersFolder
 from form_api.models.invalid_request import InvalidRequest
+from form_api.models.move_folder_data import MoveFolderData
+from form_api.models.move_template_data import MoveTemplateData
 from form_api.models.pending_template import PendingTemplate
+from form_api.models.rename_folder_data import RenameFolderData
 from form_api.models.submission import Submission
 from form_api.models.submission_action import SubmissionAction
 from form_api.models.submission_batch import SubmissionBatch

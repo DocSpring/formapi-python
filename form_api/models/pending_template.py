@@ -33,10 +33,12 @@ class PendingTemplate(object):
     openapi_types = {
         'expiration_interval': 'str',
         'webhook_url': 'str',
+        'parent_folder_id': 'str',
         'expire_after': 'float',
         'allow_additional_properties': 'bool',
         'public_submissions': 'bool',
         'slack_webhook_url': 'str',
+        'path': 'str',
         'public_web_form': 'bool',
         'editable_submissions': 'bool',
         'expire_submissions': 'bool',
@@ -49,10 +51,12 @@ class PendingTemplate(object):
     attribute_map = {
         'expiration_interval': 'expiration_interval',
         'webhook_url': 'webhook_url',
+        'parent_folder_id': 'parent_folder_id',
         'expire_after': 'expire_after',
         'allow_additional_properties': 'allow_additional_properties',
         'public_submissions': 'public_submissions',
         'slack_webhook_url': 'slack_webhook_url',
+        'path': 'path',
         'public_web_form': 'public_web_form',
         'editable_submissions': 'editable_submissions',
         'expire_submissions': 'expire_submissions',
@@ -62,15 +66,17 @@ class PendingTemplate(object):
         'redirect_url': 'redirect_url'
     }
 
-    def __init__(self, expiration_interval=None, webhook_url=None, expire_after=None, allow_additional_properties=None, public_submissions=None, slack_webhook_url=None, public_web_form=None, editable_submissions=None, expire_submissions=None, name=None, template_type=None, id=None, redirect_url=None):  # noqa: E501
+    def __init__(self, expiration_interval=None, webhook_url=None, parent_folder_id=None, expire_after=None, allow_additional_properties=None, public_submissions=None, slack_webhook_url=None, path=None, public_web_form=None, editable_submissions=None, expire_submissions=None, name=None, template_type=None, id=None, redirect_url=None):  # noqa: E501
         """PendingTemplate - a model defined in OpenAPI"""  # noqa: E501
 
         self._expiration_interval = None
         self._webhook_url = None
+        self._parent_folder_id = None
         self._expire_after = None
         self._allow_additional_properties = None
         self._public_submissions = None
         self._slack_webhook_url = None
+        self._path = None
         self._public_web_form = None
         self._editable_submissions = None
         self._expire_submissions = None
@@ -84,6 +90,8 @@ class PendingTemplate(object):
             self.expiration_interval = expiration_interval
         if webhook_url is not None:
             self.webhook_url = webhook_url
+        if parent_folder_id is not None:
+            self.parent_folder_id = parent_folder_id
         if expire_after is not None:
             self.expire_after = expire_after
         if allow_additional_properties is not None:
@@ -92,6 +100,8 @@ class PendingTemplate(object):
             self.public_submissions = public_submissions
         if slack_webhook_url is not None:
             self.slack_webhook_url = slack_webhook_url
+        if path is not None:
+            self.path = path
         if public_web_form is not None:
             self.public_web_form = public_web_form
         if editable_submissions is not None:
@@ -154,6 +164,27 @@ class PendingTemplate(object):
         """
 
         self._webhook_url = webhook_url
+
+    @property
+    def parent_folder_id(self):
+        """Gets the parent_folder_id of this PendingTemplate.  # noqa: E501
+
+
+        :return: The parent_folder_id of this PendingTemplate.  # noqa: E501
+        :rtype: str
+        """
+        return self._parent_folder_id
+
+    @parent_folder_id.setter
+    def parent_folder_id(self, parent_folder_id):
+        """Sets the parent_folder_id of this PendingTemplate.
+
+
+        :param parent_folder_id: The parent_folder_id of this PendingTemplate.  # noqa: E501
+        :type: str
+        """
+
+        self._parent_folder_id = parent_folder_id
 
     @property
     def expire_after(self):
@@ -238,6 +269,27 @@ class PendingTemplate(object):
         """
 
         self._slack_webhook_url = slack_webhook_url
+
+    @property
+    def path(self):
+        """Gets the path of this PendingTemplate.  # noqa: E501
+
+
+        :return: The path of this PendingTemplate.  # noqa: E501
+        :rtype: str
+        """
+        return self._path
+
+    @path.setter
+    def path(self, path):
+        """Sets the path of this PendingTemplate.
+
+
+        :param path: The path of this PendingTemplate.  # noqa: E501
+        :type: str
+        """
+
+        self._path = path
 
     @property
     def public_web_form(self):

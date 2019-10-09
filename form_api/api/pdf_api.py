@@ -624,6 +624,104 @@ class PDFApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def create_folder(self, create_folder_data, **kwargs):  # noqa: E501
+        """Create a folder  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_folder(create_folder_data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param CreateFolderData create_folder_data: (required)
+        :return: Folder
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.create_folder_with_http_info(create_folder_data, **kwargs)  # noqa: E501
+        else:
+            (data) = self.create_folder_with_http_info(create_folder_data, **kwargs)  # noqa: E501
+            return data
+
+    def create_folder_with_http_info(self, create_folder_data, **kwargs):  # noqa: E501
+        """Create a folder  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_folder_with_http_info(create_folder_data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param CreateFolderData create_folder_data: (required)
+        :return: Folder
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['create_folder_data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_folder" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'create_folder_data' is set
+        if ('create_folder_data' not in local_var_params or
+                local_var_params['create_folder_data'] is None):
+            raise ValueError("Missing the required parameter `create_folder_data` when calling `create_folder`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'create_folder_data' in local_var_params:
+            body_params = local_var_params['create_folder_data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/folders/', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='Folder',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def create_template(self, template_document, template_name, **kwargs):  # noqa: E501
         """Upload a new PDF template with a file upload  # noqa: E501
 
@@ -635,6 +733,7 @@ class PDFApi(object):
         :param async_req bool
         :param file template_document: (required)
         :param str template_name: (required)
+        :param str template_parent_folder_id:
         :return: PendingTemplate
                  If the method is called asynchronously,
                  returns the request thread.
@@ -657,6 +756,7 @@ class PDFApi(object):
         :param async_req bool
         :param file template_document: (required)
         :param str template_name: (required)
+        :param str template_parent_folder_id:
         :return: PendingTemplate
                  If the method is called asynchronously,
                  returns the request thread.
@@ -664,7 +764,7 @@ class PDFApi(object):
 
         local_var_params = locals()
 
-        all_params = ['template_document', 'template_name']  # noqa: E501
+        all_params = ['template_document', 'template_name', 'template_parent_folder_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -701,6 +801,8 @@ class PDFApi(object):
             local_var_files['template[document]'] = local_var_params['template_document']  # noqa: E501
         if 'template_name' in local_var_params:
             form_params.append(('template[name]', local_var_params['template_name']))  # noqa: E501
+        if 'template_parent_folder_id' in local_var_params:
+            form_params.append(('template[parent_folder_id]', local_var_params['template_parent_folder_id']))  # noqa: E501
 
         body_params = None
         # HTTP header `Accept`
@@ -821,6 +923,100 @@ class PDFApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='PendingTemplate',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def delete_folder(self, folder_id, **kwargs):  # noqa: E501
+        """Delete a folder  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_folder(folder_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str folder_id: (required)
+        :return: Folder
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.delete_folder_with_http_info(folder_id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.delete_folder_with_http_info(folder_id, **kwargs)  # noqa: E501
+            return data
+
+    def delete_folder_with_http_info(self, folder_id, **kwargs):  # noqa: E501
+        """Delete a folder  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_folder_with_http_info(folder_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str folder_id: (required)
+        :return: Folder
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['folder_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_folder" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'folder_id' is set
+        if ('folder_id' not in local_var_params or
+                local_var_params['folder_id'] is None):
+            raise ValueError("Missing the required parameter `folder_id` when calling `delete_folder`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'folder_id' in local_var_params:
+            path_params['folder_id'] = local_var_params['folder_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/folders/{folder_id}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='Folder',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -1593,7 +1789,7 @@ class PDFApi(object):
             collection_formats=collection_formats)
 
     def get_template(self, template_id, **kwargs):  # noqa: E501
-        """Check the status of an uploaded template  # noqa: E501
+        """Get a single template  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -1614,7 +1810,7 @@ class PDFApi(object):
             return data
 
     def get_template_with_http_info(self, template_id, **kwargs):  # noqa: E501
-        """Check the status of an uploaded template  # noqa: E501
+        """Get a single template  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -1780,6 +1976,96 @@ class PDFApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def list_folders(self, **kwargs):  # noqa: E501
+        """Get a list of all folders  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_folders(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str parent_folder_id: Filter By Folder Id
+        :return: list[Folder]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.list_folders_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.list_folders_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def list_folders_with_http_info(self, **kwargs):  # noqa: E501
+        """Get a list of all folders  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.list_folders_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str parent_folder_id: Filter By Folder Id
+        :return: list[Folder]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['parent_folder_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_folders" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'parent_folder_id' in local_var_params:
+            query_params.append(('parent_folder_id', local_var_params['parent_folder_id']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/folders/', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[Folder]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def list_templates(self, **kwargs):  # noqa: E501
         """Get a list of all templates  # noqa: E501
 
@@ -1790,6 +2076,7 @@ class PDFApi(object):
 
         :param async_req bool
         :param str query: Search By Name
+        :param str parent_folder_id: Filter By Folder Id
         :param int page: Default: 1
         :param int per_page: Default: 50
         :return: list[Template]
@@ -1813,6 +2100,7 @@ class PDFApi(object):
 
         :param async_req bool
         :param str query: Search By Name
+        :param str parent_folder_id: Filter By Folder Id
         :param int page: Default: 1
         :param int per_page: Default: 50
         :return: list[Template]
@@ -1822,7 +2110,7 @@ class PDFApi(object):
 
         local_var_params = locals()
 
-        all_params = ['query', 'page', 'per_page']  # noqa: E501
+        all_params = ['query', 'parent_folder_id', 'page', 'per_page']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1850,6 +2138,8 @@ class PDFApi(object):
         query_params = []
         if 'query' in local_var_params:
             query_params.append(('query', local_var_params['query']))  # noqa: E501
+        if 'parent_folder_id' in local_var_params:
+            query_params.append(('parent_folder_id', local_var_params['parent_folder_id']))  # noqa: E501
         if 'page' in local_var_params:
             query_params.append(('page', local_var_params['page']))  # noqa: E501
         if 'per_page' in local_var_params:
@@ -1877,6 +2167,324 @@ class PDFApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='list[Template]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def move_folder_to_folder(self, folder_id, move_folder_data, **kwargs):  # noqa: E501
+        """Move a folder  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.move_folder_to_folder(folder_id, move_folder_data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str folder_id: (required)
+        :param MoveFolderData move_folder_data: (required)
+        :return: Folder
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.move_folder_to_folder_with_http_info(folder_id, move_folder_data, **kwargs)  # noqa: E501
+        else:
+            (data) = self.move_folder_to_folder_with_http_info(folder_id, move_folder_data, **kwargs)  # noqa: E501
+            return data
+
+    def move_folder_to_folder_with_http_info(self, folder_id, move_folder_data, **kwargs):  # noqa: E501
+        """Move a folder  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.move_folder_to_folder_with_http_info(folder_id, move_folder_data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str folder_id: (required)
+        :param MoveFolderData move_folder_data: (required)
+        :return: Folder
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['folder_id', 'move_folder_data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method move_folder_to_folder" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'folder_id' is set
+        if ('folder_id' not in local_var_params or
+                local_var_params['folder_id'] is None):
+            raise ValueError("Missing the required parameter `folder_id` when calling `move_folder_to_folder`")  # noqa: E501
+        # verify the required parameter 'move_folder_data' is set
+        if ('move_folder_data' not in local_var_params or
+                local_var_params['move_folder_data'] is None):
+            raise ValueError("Missing the required parameter `move_folder_data` when calling `move_folder_to_folder`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'folder_id' in local_var_params:
+            path_params['folder_id'] = local_var_params['folder_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'move_folder_data' in local_var_params:
+            body_params = local_var_params['move_folder_data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/folders/{folder_id}/move', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='Folder',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def move_template_to_folder(self, template_id, move_template_data, **kwargs):  # noqa: E501
+        """Move Template to folder  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.move_template_to_folder(template_id, move_template_data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str template_id: (required)
+        :param MoveTemplateData move_template_data: (required)
+        :return: Template
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.move_template_to_folder_with_http_info(template_id, move_template_data, **kwargs)  # noqa: E501
+        else:
+            (data) = self.move_template_to_folder_with_http_info(template_id, move_template_data, **kwargs)  # noqa: E501
+            return data
+
+    def move_template_to_folder_with_http_info(self, template_id, move_template_data, **kwargs):  # noqa: E501
+        """Move Template to folder  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.move_template_to_folder_with_http_info(template_id, move_template_data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str template_id: (required)
+        :param MoveTemplateData move_template_data: (required)
+        :return: Template
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['template_id', 'move_template_data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method move_template_to_folder" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'template_id' is set
+        if ('template_id' not in local_var_params or
+                local_var_params['template_id'] is None):
+            raise ValueError("Missing the required parameter `template_id` when calling `move_template_to_folder`")  # noqa: E501
+        # verify the required parameter 'move_template_data' is set
+        if ('move_template_data' not in local_var_params or
+                local_var_params['move_template_data'] is None):
+            raise ValueError("Missing the required parameter `move_template_data` when calling `move_template_to_folder`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'template_id' in local_var_params:
+            path_params['template_id'] = local_var_params['template_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'move_template_data' in local_var_params:
+            body_params = local_var_params['move_template_data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/templates/{template_id}/move', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='Template',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def rename_folder(self, folder_id, rename_folder_data, **kwargs):  # noqa: E501
+        """Rename a folder  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.rename_folder(folder_id, rename_folder_data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str folder_id: (required)
+        :param RenameFolderData rename_folder_data: (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.rename_folder_with_http_info(folder_id, rename_folder_data, **kwargs)  # noqa: E501
+        else:
+            (data) = self.rename_folder_with_http_info(folder_id, rename_folder_data, **kwargs)  # noqa: E501
+            return data
+
+    def rename_folder_with_http_info(self, folder_id, rename_folder_data, **kwargs):  # noqa: E501
+        """Rename a folder  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.rename_folder_with_http_info(folder_id, rename_folder_data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str folder_id: (required)
+        :param RenameFolderData rename_folder_data: (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['folder_id', 'rename_folder_data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method rename_folder" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'folder_id' is set
+        if ('folder_id' not in local_var_params or
+                local_var_params['folder_id'] is None):
+            raise ValueError("Missing the required parameter `folder_id` when calling `rename_folder`")  # noqa: E501
+        # verify the required parameter 'rename_folder_data' is set
+        if ('rename_folder_data' not in local_var_params or
+                local_var_params['rename_folder_data'] is None):
+            raise ValueError("Missing the required parameter `rename_folder_data` when calling `rename_folder`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'folder_id' in local_var_params:
+            path_params['folder_id'] = local_var_params['folder_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'rename_folder_data' in local_var_params:
+            body_params = local_var_params['rename_folder_data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/folders/{folder_id}/rename', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501

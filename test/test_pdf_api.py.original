@@ -82,6 +82,13 @@ class TestPDFApi(unittest.TestCase):
         """
         data_request_id = 'drq_000000000000000001' # str | 
         api_response = self.api.create_data_request_token(data_request_id)
+    def test_create_folder(self):
+        """Test case for create_folder
+
+        Create a folder  # noqa: E501
+        """
+        create_folder_data = form_api.CreateFolderData() # CreateFolderData | 
+        api_response = self.api.create_folder(create_folder_data)
     def test_create_template(self):
         """Test case for create_template
 
@@ -89,7 +96,8 @@ class TestPDFApi(unittest.TestCase):
         """
         template_document = '/path/to/file' # file | 
         template_name = 'template_name_example' # str | 
-        api_response = self.api.create_template(template_document, template_name)
+        template_parent_folder_id = 'template_parent_folder_id_example' # str |  (optional)
+        api_response = self.api.create_template(template_document, template_name, template_parent_folder_id=template_parent_folder_id)
     def test_create_template_from_upload(self):
         """Test case for create_template_from_upload
 
@@ -97,6 +105,13 @@ class TestPDFApi(unittest.TestCase):
         """
         create_template_data = form_api.CreateTemplateData() # CreateTemplateData | 
         api_response = self.api.create_template_from_upload(create_template_data)
+    def test_delete_folder(self):
+        """Test case for delete_folder
+
+        Delete a folder  # noqa: E501
+        """
+        folder_id = 'fld_000000000000000001' # str | 
+        api_response = self.api.delete_folder(folder_id)
     def test_expire_combined_submission(self):
         """Test case for expire_combined_submission
 
@@ -158,9 +173,9 @@ class TestPDFApi(unittest.TestCase):
     def test_get_template(self):
         """Test case for get_template
 
-        Check the status of an uploaded template  # noqa: E501
+        Get a single template  # noqa: E501
         """
-        template_id = 'tpl_000000000000000001' # str | 
+        template_id = 'tpl_000000000000000011' # str | 
         api_response = self.api.get_template(template_id)
     def test_get_template_schema(self):
         """Test case for get_template_schema
@@ -169,16 +184,47 @@ class TestPDFApi(unittest.TestCase):
         """
         template_id = 'tpl_000000000000000001' # str | 
         api_response = self.api.get_template_schema(template_id)
+    def test_list_folders(self):
+        """Test case for list_folders
+
+        Get a list of all folders  # noqa: E501
+        """
+        parent_folder_id = 'fld_000000000000000002' # str | Filter By Folder Id (optional)
+        api_response = self.api.list_folders(parent_folder_id=parent_folder_id)
     def test_list_templates(self):
         """Test case for list_templates
 
         Get a list of all templates  # noqa: E501
         """
         query = '2' # str | Search By Name (optional)
+        parent_folder_id = 'fld_000000000000000001' # str | Filter By Folder Id (optional)
         page = 2 # int | Default: 1 (optional)
         per_page = 1 # int | Default: 50 (optional)
-        api_response = self.api.list_templates(query=query, page=page, per_page=per_page)
-    def test_test_authentication(self):
+        api_response = self.api.list_templates(query=query, parent_folder_id=parent_folder_id, page=page, per_page=per_page)
+    def test_move_folder_to_folder(self):
+        """Test case for move_folder_to_folder
+
+        Move a folder  # noqa: E501
+        """
+        folder_id = 'fld_000000000000000001' # str | 
+        move_folder_data = form_api.MoveFolderData() # MoveFolderData | 
+        api_response = self.api.move_folder_to_folder(folder_id, move_folder_data)
+    def test_move_template_to_folder(self):
+        """Test case for move_template_to_folder
+
+        Move Template to folder  # noqa: E501
+        """
+        template_id = 'tpl_000000000000000001' # str | 
+        move_template_data = form_api.MoveTemplateData() # MoveTemplateData | 
+        api_response = self.api.move_template_to_folder(template_id, move_template_data)
+    def test_rename_folder(self):
+        """Test case for rename_folder
+
+        Rename a folder  # noqa: E501
+        """
+        folder_id = 'fld_000000000000000001' # str | 
+        rename_folder_data = form_api.RenameFolderData() # RenameFolderData | 
+        self.api.rename_folder(folder_id, rename_folder_data)    def test_test_authentication(self):
         """Test case for test_authentication
 
         Test Authentication  # noqa: E501

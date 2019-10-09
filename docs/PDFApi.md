@@ -10,8 +10,10 @@ Method | HTTP request | Description
 [**combine_submissions**](PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
 [**create_custom_file_from_upload**](PDFApi.md#create_custom_file_from_upload) | **POST** /custom_files | Create a new custom file from a cached presign upload
 [**create_data_request_token**](PDFApi.md#create_data_request_token) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
+[**create_folder**](PDFApi.md#create_folder) | **POST** /folders/ | Create a folder
 [**create_template**](PDFApi.md#create_template) | **POST** /templates | Upload a new PDF template with a file upload
 [**create_template_from_upload**](PDFApi.md#create_template_from_upload) | **POST** /templates?v&#x3D;2 | Create a new PDF template from a cached presign upload
+[**delete_folder**](PDFApi.md#delete_folder) | **DELETE** /folders/{folder_id} | Delete a folder
 [**expire_combined_submission**](PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generate_pdf**](PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
@@ -20,9 +22,13 @@ Method | HTTP request | Description
 [**get_presign_url**](PDFApi.md#get_presign_url) | **GET** /uploads/presign | Get a presigned URL so that you can upload a file to our AWS S3 bucket
 [**get_submission**](PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
 [**get_submission_batch**](PDFApi.md#get_submission_batch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
-[**get_template**](PDFApi.md#get_template) | **GET** /templates/{template_id} | Check the status of an uploaded template
+[**get_template**](PDFApi.md#get_template) | **GET** /templates/{template_id} | Get a single template
 [**get_template_schema**](PDFApi.md#get_template_schema) | **GET** /templates/{template_id}/schema | Fetch the JSON schema for a template
+[**list_folders**](PDFApi.md#list_folders) | **GET** /folders/ | Get a list of all folders
 [**list_templates**](PDFApi.md#list_templates) | **GET** /templates | Get a list of all templates
+[**move_folder_to_folder**](PDFApi.md#move_folder_to_folder) | **POST** /folders/{folder_id}/move | Move a folder
+[**move_template_to_folder**](PDFApi.md#move_template_to_folder) | **POST** /templates/{template_id}/move | Move Template to folder
+[**rename_folder**](PDFApi.md#rename_folder) | **POST** /folders/{folder_id}/rename | Rename a folder
 [**test_authentication**](PDFApi.md#test_authentication) | **GET** /authentication | Test Authentication
 [**update_data_request**](PDFApi.md#update_data_request) | **PUT** /data_requests/{data_request_id} | Update a submission data request
 
@@ -347,8 +353,61 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_folder**
+> Folder create_folder(create_folder_data)
+
+Create a folder
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+create_folder_data = form_api.CreateFolderData() # CreateFolderData | 
+
+try:
+    # Create a folder
+    api_response = api_instance.create_folder(create_folder_data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->create_folder: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_folder_data** | [**CreateFolderData**](CreateFolderData.md)|  | 
+
+### Return type
+
+[**Folder**](Folder.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **create_template**
-> PendingTemplate create_template(template_document, template_name)
+> PendingTemplate create_template(template_document, template_name, template_parent_folder_id=template_parent_folder_id)
 
 Upload a new PDF template with a file upload
 
@@ -371,10 +430,11 @@ configuration.password = 'YOUR_PASSWORD'
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
 template_document = '/path/to/file' # file | 
 template_name = 'template_name_example' # str | 
+template_parent_folder_id = 'template_parent_folder_id_example' # str |  (optional)
 
 try:
     # Upload a new PDF template with a file upload
-    api_response = api_instance.create_template(template_document, template_name)
+    api_response = api_instance.create_template(template_document, template_name, template_parent_folder_id=template_parent_folder_id)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->create_template: %s\n" % e)
@@ -386,6 +446,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_document** | **file**|  | 
  **template_name** | **str**|  | 
+ **template_parent_folder_id** | **str**|  | [optional] 
 
 ### Return type
 
@@ -451,6 +512,59 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_folder**
+> Folder delete_folder(folder_id)
+
+Delete a folder
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+folder_id = 'fld_000000000000000001' # str | 
+
+try:
+    # Delete a folder
+    api_response = api_instance.delete_folder(folder_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->delete_folder: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **str**|  | 
+
+### Return type
+
+[**Folder**](Folder.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -884,7 +998,7 @@ Name | Type | Description  | Notes
 # **get_template**
 > Template get_template(template_id)
 
-Check the status of an uploaded template
+Get a single template
 
 ### Example
 
@@ -903,10 +1017,10 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-template_id = 'tpl_000000000000000001' # str | 
+template_id = 'tpl_000000000000000011' # str | 
 
 try:
-    # Check the status of an uploaded template
+    # Get a single template
     api_response = api_instance.get_template(template_id)
     pprint(api_response)
 except ApiException as e:
@@ -987,8 +1101,61 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_folders**
+> list[Folder] list_folders(parent_folder_id=parent_folder_id)
+
+Get a list of all folders
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+parent_folder_id = 'fld_000000000000000002' # str | Filter By Folder Id (optional)
+
+try:
+    # Get a list of all folders
+    api_response = api_instance.list_folders(parent_folder_id=parent_folder_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->list_folders: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parent_folder_id** | **str**| Filter By Folder Id | [optional] 
+
+### Return type
+
+[**list[Folder]**](Folder.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_templates**
-> list[Template] list_templates(query=query, page=page, per_page=per_page)
+> list[Template] list_templates(query=query, parent_folder_id=parent_folder_id, page=page, per_page=per_page)
 
 Get a list of all templates
 
@@ -1010,12 +1177,13 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
 query = '2' # str | Search By Name (optional)
+parent_folder_id = 'fld_000000000000000001' # str | Filter By Folder Id (optional)
 page = 2 # int | Default: 1 (optional)
 per_page = 1 # int | Default: 50 (optional)
 
 try:
     # Get a list of all templates
-    api_response = api_instance.list_templates(query=query, page=page, per_page=per_page)
+    api_response = api_instance.list_templates(query=query, parent_folder_id=parent_folder_id, page=page, per_page=per_page)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->list_templates: %s\n" % e)
@@ -1026,6 +1194,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| Search By Name | [optional] 
+ **parent_folder_id** | **str**| Filter By Folder Id | [optional] 
  **page** | **int**| Default: 1 | [optional] 
  **per_page** | **int**| Default: 50 | [optional] 
 
@@ -1040,6 +1209,170 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **move_folder_to_folder**
+> Folder move_folder_to_folder(folder_id, move_folder_data)
+
+Move a folder
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+folder_id = 'fld_000000000000000001' # str | 
+move_folder_data = form_api.MoveFolderData() # MoveFolderData | 
+
+try:
+    # Move a folder
+    api_response = api_instance.move_folder_to_folder(folder_id, move_folder_data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->move_folder_to_folder: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **str**|  | 
+ **move_folder_data** | [**MoveFolderData**](MoveFolderData.md)|  | 
+
+### Return type
+
+[**Folder**](Folder.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **move_template_to_folder**
+> Template move_template_to_folder(template_id, move_template_data)
+
+Move Template to folder
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+template_id = 'tpl_000000000000000001' # str | 
+move_template_data = form_api.MoveTemplateData() # MoveTemplateData | 
+
+try:
+    # Move Template to folder
+    api_response = api_instance.move_template_to_folder(template_id, move_template_data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->move_template_to_folder: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **str**|  | 
+ **move_template_data** | [**MoveTemplateData**](MoveTemplateData.md)|  | 
+
+### Return type
+
+[**Template**](Template.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rename_folder**
+> rename_folder(folder_id, rename_folder_data)
+
+Rename a folder
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+folder_id = 'fld_000000000000000001' # str | 
+rename_folder_data = form_api.RenameFolderData() # RenameFolderData | 
+
+try:
+    # Rename a folder
+    api_instance.rename_folder(folder_id, rename_folder_data)
+except ApiException as e:
+    print("Exception when calling PDFApi->rename_folder: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **str**|  | 
+ **rename_folder_data** | [**RenameFolderData**](RenameFolderData.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

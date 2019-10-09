@@ -276,7 +276,7 @@ class Submission(object):
         """
         if state is None:
             raise ValueError("Invalid value for `state`, must not be `None`")  # noqa: E501
-        allowed_values = ["pending", "processed", "invalid_data", "error", "image_download_failed", "image_processing_failed", "waiting_for_data_requests", "liquid_syntax_error", "account_suspended", "license_revoked"]  # noqa: E501
+        allowed_values = ["pending", "processed", "invalid_data", "error", "image_download_failed", "image_processing_failed", "waiting_for_data_requests", "syntax_error", "account_suspended", "license_revoked"]  # noqa: E501
         if state not in allowed_values:
             raise ValueError(
                 "Invalid value for `state` ({0}), must be one of {1}"  # noqa: E501
