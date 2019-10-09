@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "form-api"
-VERSION = "1.11.0"
+VERSION = "1.12.0"
 # To install the library, run the following
 #
 # python setup.py install
